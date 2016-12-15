@@ -446,6 +446,8 @@ asytoread
 ### C++
 
 - Use const whenever possible
+- Separate functions and data
+- Keep classes thin
 
 ### Building
 
