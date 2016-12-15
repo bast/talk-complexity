@@ -445,7 +445,6 @@ asytoread
 
 ### C++
 
-- Use shared_ptr and/or smart_ptr
 - Use const whenever possible
 
 ### Building
