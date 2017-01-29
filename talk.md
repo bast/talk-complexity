@@ -685,10 +685,42 @@ a = b*c
 
 ---
 
-variable reuse
+## Variable reuse
+
+### 1) reuse memory
+
+```fortran
+integer, parameter :: length = 1000000
+real(8) :: distances(length)
+
+distances = get_distances()
+call do_something(distances)
+
+! now we do not need distances anymore, we can safely reuse the array
+distances = get_angles()
+call do_something_else(distances)
+```
+
+### 2) no reuse
+
+```fortran
+integer, parameter :: length = 1000000
+real(8) :: distances(length)
+real(8) :: angles(length)
+
+distances = get_distances()
+call do_something(distances)
+
+angles = get_angles()
+call do_something_else(angles)
+```
+
+---
+
 ternary
 explit use vs generic use
 python imports
+function level imports
 map vs loop
 filter vs loop
 extra arguments and ifs vs higher-order function
