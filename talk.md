@@ -55,11 +55,11 @@ layout: false
 - The code base easily becomes untidy ("I'll fix it later")
 - Small changes become harder to implement
 - Hacks and workarounds trump design
-- Bugs start appearing where in unexpected places
+- Bugs start appearing in unexpected places
 - More time is spent debugging than developing
-- Complexity strangles development
+- Complexity strangles development because it does not scale well
 
-(Slide taken from [Complexity in software development by Jonas Juselius](https://github.com/scisoft/complexity))
+(Slide adapted from [Complexity in software development by Jonas Juselius](https://github.com/scisoft/complexity))
 
 ---
 
@@ -808,7 +808,7 @@ import somelib  # python
 ```
 
 ```fortran
-use somelib  # fortran
+use somelib  ! fortran
 ```
 
 ### b) function import
