@@ -906,8 +906,105 @@ return (a == 5)
 
 ---
 
-extra arguments and ifs vs. higher-order function
-const in c++
-intent
-private vs. public
-narrowing scope
+## Conditionals vs. higher-order function
+
+### a) conditionals
+
+```python
+def apply(x, square=False, double=False):
+    if square:
+        return x**2
+    elif double:
+        return 2.0*x
+    else
+        # do something else
+
+apply(2.0, square=True)
+```
+
+### b) higher-order function
+
+```python
+def apply(x, f):
+    return f(x)
+
+apply(2.0, lambda x: x**2)
+```
+
+---
+
+## Intent vs. unspecified
+
+### a) intent specified
+
+```fortran
+subroutine do_something(a, b, c, d)
+    real(8), intent(in)    :: a
+    logical, intent(in)    :: b
+    real(8), intent(inout) :: c
+    real(8), intent(out)   :: d
+
+    ! ...
+end subroutine
+```
+
+### b) intent unspecified
+
+```fortran
+subroutine do_something(a, b, c, d)
+    real(8) :: a
+    logical :: b
+    real(8) :: d
+    real(8) :: d
+
+    ! ...
+end subroutine
+```
+
+---
+
+## Private vs. public
+
+### a) default is private
+
+```fortran
+module mymodule
+    implicit none
+    public myroutine
+    private
+contains
+    subroutine myroutine()
+    ...
+    end subroutine
+end module
+```
+
+### b) default is public
+
+```fortran
+module mymodule
+    implicit none
+contains
+    subroutine myroutine()
+    ...
+    end subroutine
+end module
+```
+
+---
+
+## Const in C++
+
+### a) const
+
+```cpp
+int get_buffer_len(const int max_geo_order,
+                   const int num_points) const;
+```
+
+### b) unspecified
+
+```cpp
+int get_buffer_len(int max_geo_order,
+                   int num_points);
+```
