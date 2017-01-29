@@ -346,10 +346,7 @@ template: inverse
 ### a) pass file name
 
 ```python
-def parse_input1(file_name):
-    with open(file_name, 'r') as f:
-       # here do the parsing work
-    return result
+result = parse_input1(file_name)
 ```
 
 ### b) pass file handle
