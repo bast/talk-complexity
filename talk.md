@@ -487,7 +487,7 @@ template: inverse
 
 ## File I/O (example: Python)
 
-### 1) pass file name
+### a) pass file name
 
 ```python
 def parse_input1(file_name):
@@ -496,14 +496,14 @@ def parse_input1(file_name):
     return result
 ```
 
-### 2) pass file handle
+### b) pass file handle
 
 ```python
 with open(file_name, 'r') as f:
     result = parse_input2(f)
 ```
 
-### 3) pass data
+### c) pass data
 
 ```python
 with open(file_name, 'r') as f:
@@ -515,7 +515,7 @@ with open(file_name, 'r') as f:
 
 ## Pure vs. default in Fortran
 
-### 1) default
+### a) default
 
 ```fortran
 function factor_and_offset(vector, factor)
@@ -528,7 +528,7 @@ function factor_and_offset(vector, factor)
 end function
 ```
 
-### 2) with "pure" attribute
+### b) with "pure" attribute
 
 ```fortran
 pure function factor_and_offset(vector, factor)
@@ -545,7 +545,7 @@ end function
 
 ## Argument vs. global
 
-### 1) "offset" passed as argument
+### a) "offset" passed as argument
 
 ```fortran
 function factor_and_offset(vector, factor, offset)
@@ -559,7 +559,7 @@ function factor_and_offset(vector, factor, offset)
 end function
 ```
 
-### 2) "offset" defined in outer scope
+### b) "offset" defined in outer scope
 
 ```fortran
 function factor_and_offset(vector, factor)
@@ -576,13 +576,13 @@ end function
 
 ## Compact vs. explicit vs. intrinsic in Fortran
 
-### 1) array constructor
+### a) array constructor
 
 ```fortran
 factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
 ```
 
-### 2) explicit
+### b) explicit
 
 ```fortran
 do i = 1, size(vector)
@@ -590,7 +590,7 @@ do i = 1, size(vector)
 end do
 ```
 
-### 3) intrinsic array operation
+### c) intrinsic array operation
 
 ```fortran
 factor_and_offset = vector*factor + offset
@@ -600,7 +600,7 @@ factor_and_offset = vector*factor + offset
 
 ## Pure vs. stateful
 
-### 1) pure
+### a) pure
 
 ```python
 # function which computes the body mass index
@@ -611,7 +611,7 @@ def get_bmi(mass_kg, height_m):
 bmi = get_bmi(mass_kg=90.0, height_m=1.91))
 ```
 
-### 2) stateful
+### b) stateful
 
 ```python
 mass_kg = 90.0
@@ -631,7 +631,7 @@ get_bmi()
 
 ## Main function vs. global scope in Python
 
-### 1) main function
+### a) main function
 
 ```python
 def do_something(input):
@@ -645,7 +645,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 2) global scope
+### b) global scope
 
 ```python
 def do_something(input):
@@ -659,7 +659,7 @@ do_something_else(result)
 
 ## Implicit vs. implicit none in Fortran
 
-### 1) implicit
+### a) implicit
 
 ```fortran
 b = 2.0d0
@@ -668,7 +668,7 @@ c = 3.0d0
 a = b*c
 ```
 
-### 2) implicit none
+### b) implicit none
 
 ```fortran
 implicit none
@@ -687,7 +687,7 @@ a = b*c
 
 ## Variable reuse
 
-### 1) reuse memory
+### a) reuse memory
 
 ```fortran
 integer, parameter :: length = 1000000
@@ -701,7 +701,7 @@ distances = get_angles()
 call do_something_else(distances)
 ```
 
-### 2) no reuse
+### b) no reuse
 
 ```fortran
 integer, parameter :: length = 1000000
