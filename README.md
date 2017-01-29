@@ -1,6 +1,6 @@
-[Slides](http://cicero.xyz/v2/remark/github/bast/talk-complexity/master/talk.md/)
-are free to share and remix under
-[CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Slides: [Managing complexity and modular code development](http://cicero.xyz/v2/remark/github/bast/talk-complexity/master/talk.md/)
+
+Text: free to share and remix under [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
 Code examples: [MIT license](http://opensource.org/licenses/mit-license.html).
 
