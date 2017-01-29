@@ -562,7 +562,7 @@ end function
 ### 2) "offset" defined in outer scope
 
 ```fortran
-pure function factor_and_offset(vector, factor)
+function factor_and_offset(vector, factor)
     real(8), intent(in) :: vector(:)
     real(8), intent(in) :: factor
     real(8) :: factor_and_offset(size(vector))
@@ -574,7 +574,7 @@ end function
 
 ---
 
-## Compact vs. explicit vs. intrinsic
+## Compact vs. explicit vs. intrinsic in Fortran
 
 ### 1) array constructor
 
@@ -586,7 +586,7 @@ factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
 
 ```fortran
 do i = 1, size(vector)
-   factor_and_offset(i) = vector(i)*factor + offset
+    factor_and_offset(i) = vector(i)*factor + offset
 end do
 ```
 
@@ -598,18 +598,104 @@ factor_and_offset = vector*factor + offset
 
 ---
 
+## Pure vs. stateful
+
+### 1) pure
+
+```python
+# function which computes the body mass index
+def get_bmi(mass_kg, height_m):
+    return mass_kg/(height_m**2)
+
+# compute the body mass index
+bmi = get_bmi(mass_kg=90.0, height_m=1.91))
+```
+
+### 2) stateful
+
+```python
+mass_kg = 90.0
+height_m = 1.91
+bmi = 0.0
+
+# function which computes the body mass index
+def get_bmi():
+    global bmi
+    bmi = mass_kg/(height_m**2)
+
+# compute the body mass index
+get_bmi()
+```
+
+---
+
+## Main function vs. global scope in Python
+
+### 1) main function
+
+```python
+def do_something(input):
+    return something
+
+def main():
+    result = do_something(input)
+    do_something_else(result)
+
+if __name__ == '__main__':
+    main()
+```
+
+### 2) global scope
+
+```python
+def do_something(input):
+    return something
+
+result = do_something(input)
+do_something_else(result)
+```
+
+---
+
+## Implicit vs. implicit none in Fortran
+
+### 1) implicit
+
+```fortran
+b = 2.0d0
+c = 3.0d0
+
+a = b*c
+```
+
+### 2) implicit none
+
+```fortran
+implicit none
+
+real(8) :: a
+real(8) :: b
+real(8) :: c
+
+b = 2.0d0
+c = 3.0d0
+
+a = b*c
+```
+
+---
+
+variable reuse
+ternary
 explit use vs generic use
 python imports
 map vs loop
 filter vs loop
 extra arguments and ifs vs higher-order function
 object vs named tuple
-pure vs stateful
 const in c++
 intent
-implicit none
 named arguments
-__main__ vs naked code
 private vs public
 stateful vs stateless https://maryrosecook.com/blog/post/a-practical-introduction-to-functional-programming
 unnecessary if return
