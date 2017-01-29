@@ -131,14 +131,13 @@ layout: false
   public/private in Fortran, underscores in Python)
 - "Python has no locked doors; it's a consenting adults language.
   If you open the door you're responsible for what you see." [R. Hettinger]
-- Interface exposed in a separate file
 - Expose the "what", hide the "how"
 
 ### Documentation
 
 - Separate the "what it can do" from "how is it implemented"
-- Documented API
-- Versioned API ([semantic](http://semver.org) or [sentimental](http://sentimentalversioning.org)
+- Document your API
+- Version your API ([semantic](http://semver.org) or [sentimental](http://sentimentalversioning.org)
   or [romantic](https://github.com/jashkenas/backbone/issues/2888#issuecomment-29076249) versioning)
 
 ---
@@ -149,6 +148,7 @@ layout: false
 
 - Sharpens interfaces
 - Once you start testing your library you really see the coupling and cohesion
+- Increases development speed
 
 ### Built on its own
 
@@ -158,39 +158,6 @@ layout: false
 
 - Decouple the development history
 - Each unit should have its own Git history/repository
-
----
-
-## Pure vs. stateful
-
-Pure function
-
-```python
-# function which computes the body mass index
-def get_bmi(mass_kg, height_m):
-    return mass_kg/(height_m**2)
-
-# compute the body mass index
-bmi = get_bmi(mass_kg=90.0, height_m=1.91))
-```
-
-Stateful code
-
-```python
-mass_kg = 90.0
-height_m = 1.91
-bmi = 0.0
-
-# function which computes the body mass index
-def get_bmi():
-    global bmi
-    bmi = mass_kg/(height_m**2)
-
-# compute the body mass index
-get_bmi()
-```
-- Avoid global variables, including module and object state
-- Do not reuse variables
 
 ---
 
@@ -233,6 +200,12 @@ get_bmi()
 
 ---
 
+## Equational reasoning
+
+Write me ...
+
+---
+
 ## Concurrency
 
 - Concurrency in imperative code is very hard
@@ -247,8 +220,8 @@ get_bmi()
 
 ## Composition
 
-- Composition enables us to build complex behavior from simple components
-- We can reason about the components, and we can reason about the composite
+- Build complex behavior from simple components
+- We can reason about the components and the composite
 - Composition is key to managing complexity
 - Modularity does not imply simplicity, but is enabled by it
 
@@ -258,38 +231,11 @@ get_bmi()
 
 ---
 
-## Object-oriented programming is often stateful programming
-
-*"The problem with object-oriented languages is they've got all this implicit
-environment that they carry around with them. You wanted a banana but what you
-got was a gorilla holding the banana and the entire jungle."*
-
-Joe Armstrong
-
-- Do not write objects when a function will do
-
----
-
 ## One way to look at your code
 
 ![](img/main-inside.svg)
 
 - The main function calls other functions
-
----
-
-## Where to deal with the state? Typical questions:
-
-- Where to do file I/O?
-    - In the main function?
-    - Should we pass the file name and open the files deep down in functions?
-    - Should we open the file and pass the file handle?
-    - Should we read the data and pass the data?
-- Where to keep "global" data?
-    - In the main function?
-    - In a Fortran common block?
-    - In a Fortran module?
-    - In functions with save attributes?
 
 ---
 
@@ -303,7 +249,7 @@ Joe Armstrong
 
 ## Recommendations
 
-- Keep I/O on the outside and connected
+- Keep I/O on the outside and connected (examples later)
 - Always read/write on the outside and pass data
 - Do not read/write deep down inside the code
 - Keep the inside of your code pure/stateless
@@ -318,9 +264,7 @@ Joe Armstrong
 
 template: inverse
 
-## Language specific recommendations
-
-### (personal opinion)
+## Recommendations
 
 ---
 
@@ -374,50 +318,6 @@ template: inverse
 
 ---
 
-## Example: Python
-
-- Bad
-```python
-from mymodule import *
-```
-
-- Better
-```python
-from mymodule import function1, function2
-```
-
-- Also good
-```python
-import mymodule
-```
-- Better for people writing code (avoids name collision)
-- Better for people reading code (easier to see where functions come from)
-- Importing modules at function level and not at module level
-
-### Exporting
-
-- Use `__init__.py` which should only contain imports (no code or data)
-- Use `__all__`
-
----
-
-## Example: Fortran
-
-- Bad
-```fortran
-use mymodule
-```
-
-- Better
-```fortran
-use mymodule, only: function1, function2
-```
-
-- Same reasoning as in Python
-- Importing modules at function level and not at module level
-
----
-
 ## Naming things
 
 - Use meaningful names
@@ -430,50 +330,6 @@ use mymodule, only: function1, function2
 Makecodee
 asytoread
 ```
-
----
-
-## More recommendations
-
-### Python
-
-- Use named tuples and functions instead of classes
-
-### Fortran
-
-- Use pure functions, pure subroutines, and elemental functions whenever possible
-
-### C++
-
-- Use const whenever possible
-- Separate functions and data
-- Keep classes thin
-
-### Building
-
-- Use CMake to build modular code
-
----
-
-## Test your C/C++/Fortran code with Python
-
-- Forces you to create a clean interface (good)
-- Nice byproduct: you have a Python interface (good)
-- Encourages dynamic library (good)
-- You can write and prototype tests without recompiling/relinking the library (good)
-- Allows you to use the wonderfully lightweight [pytest](http://pytest.org) (no more excuses for the Fortran crowd)
-- Example: https://github.com/bast/context-api-example
-
----
-
-## Complexity/viscosity
-
-- Simplicity is hard
-- Writing modular code is hard
-- As we break up the code into libraries the surface area increases
-- Investment with late but huge return
-
-<img src="img/development-speed.svg" style="width: 500px;"/>
 
 ---
 
