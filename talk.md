@@ -717,21 +717,35 @@ call do_something_else(angles)
 
 ---
 
-## Ternary operator (Python)
+## Ternary operator
 
 ### a) ternary
 
 ```python
-index = 1 if is_odd else 2
+index = 1 if is_odd else 2  # python
+```
+
+```fortran
+index = merge(1, 2, is_odd)  ! fortran
 ```
 
 ### b) explicit
 
 ```python
+# python
 if is_odd:
     index = 1
 else:
     index = 2
+```
+
+```fortran
+! fortran
+if (is_odd) then
+    index = 1
+else
+    index = 2
+end if
 ```
 
 ---
@@ -751,7 +765,7 @@ my_cat.go_for_a_walk()
 print(my_cat.hunger)
 ```
 
-### b) named tuple
+### or b) named tuple
 
 ```python
 from collections import namedtuple
@@ -785,16 +799,115 @@ bmi = get_bmi(mass_kg=90.0, height_m=1.91))
 
 ---
 
-explit use vs generic use
-python imports
-function level imports
-map vs loop
-filter vs loop
-extra arguments and ifs vs higher-order function
+## Generic vs. function import
+
+### a) generic
+
+```python
+import somelib  # python
+```
+
+```fortran
+use somelib  # fortran
+```
+
+### b) function import
+
+```python
+from somelib import this, that
+```
+
+```fortran
+use somelib, only: this, that
+```
+
+---
+
+## Module-level vs. function-level import (Python or Fortran)
+
+### a) module-level
+
+```python
+from somelib import somefunction
+
+def myfunction(a, b, c):
+    # use somefunction
+    return something
+```
+
+### b) function-level
+
+```python
+def myfunction(a, b, c):
+    from somelib import somefunction
+    # use somefunction
+    return something
+```
+
+---
+
+## Map vs. loop
+
+### a) loop
+
+```python
+numbers = [1, 2, 3, 4, 5]
+squares = []
+for number in numbers:
+    squares.append(number**2)
+```
+
+### b) map
+
+```python
+numbers = [1, 2, 3, 4, 5]
+squares = map(lambda x: x**2, numbers)
+```
+
+---
+
+## Filter vs. loop
+
+### a) loop
+
+```python
+numbers = [1, 2, 3, 4, 5]
+odds = []
+for number in numbers:
+    if number%2 == 1:
+        odds.append(number)
+```
+
+### b) filter
+
+```python
+numbers = [1, 2, 3, 4, 5]
+odds = filter(lambda x: x%2 == 1, numbers)
+```
+
+---
+
+## If return
+
+### a)
+
+```python
+if a == 5:
+    return True
+else:
+    return False
+```
+
+### b)
+
+```python
+return (a == 5)
+```
+
+---
+
+extra arguments and ifs vs. higher-order function
 const in c++
 intent
-private vs public
-stateful vs stateless https://maryrosecook.com/blog/post/a-practical-introduction-to-functional-programming
-unnecessary if return
+private vs. public
 narrowing scope
-scaling of complexity
