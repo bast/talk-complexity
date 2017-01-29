@@ -427,21 +427,21 @@ end function
 ### a) array constructor
 
 ```fortran
-factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
+result = (/(vector(i)*factor + offset, i = 1, size(vector))/)
 ```
 
 ### b) explicit
 
 ```fortran
 do i = 1, size(vector)
-    factor_and_offset(i) = vector(i)*factor + offset
+    result(i) = vector(i)*factor + offset
 end do
 ```
 
 ### c) intrinsic array operation
 
 ```fortran
-factor_and_offset = vector*factor + offset
+result = vector*factor + offset
 ```
 
 ---
