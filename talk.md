@@ -477,9 +477,127 @@ asytoread
 
 ---
 
-file-io
-pure vs normal in fortran
-argument vs common block
+template: inverse
+
+## Quiz
+
+### Decide which alternative you like better and discuss why
+
+---
+
+## File I/O (example: Python)
+
+### 1) pass file name
+
+```python
+def parse_input1(file_name):
+    with open(file_name, 'r') as f:
+       # here do the parsing work
+    return result
+```
+
+### 2) pass file handle
+
+```python
+with open(file_name, 'r') as f:
+    result = parse_input2(f)
+```
+
+### 3) pass data
+
+```python
+with open(file_name, 'r') as f:
+    input_lines = f.readlines()
+    result = parse_input3(input_lines)
+```
+
+---
+
+## Pure vs. default in Fortran
+
+### 1) default
+
+```fortran
+function factor_and_offset(vector, factor)
+    real(8), intent(in) :: vector(:)
+    real(8), intent(in) :: factor
+    real(8) :: factor_and_offset(size(vector))
+    integer :: i
+
+    factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
+end function
+```
+
+### 2) with "pure" attribute
+
+```fortran
+pure function factor_and_offset(vector, factor)
+    real(8), intent(in) :: vector(:)
+    real(8), intent(in) :: factor
+    real(8) :: factor_and_offset(size(vector))
+    integer :: i
+
+    factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
+end function
+```
+
+---
+
+## Argument vs. global
+
+### 1) "offset" passed as argument
+
+```fortran
+function factor_and_offset(vector, factor, offset)
+    real(8), intent(in) :: vector(:)
+    real(8), intent(in) :: factor
+    real(8), intent(in) :: offset
+    real(8) :: factor_and_offset(size(vector))
+    integer :: i
+
+    factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
+end function
+```
+
+### 2) "offset" defined in outer scope
+
+```fortran
+pure function factor_and_offset(vector, factor)
+    real(8), intent(in) :: vector(:)
+    real(8), intent(in) :: factor
+    real(8) :: factor_and_offset(size(vector))
+    integer :: i
+
+    factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
+end function
+```
+
+---
+
+## Compact vs. explicit vs. intrinsic
+
+### 1) array constructor
+
+```fortran
+factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
+```
+
+### 2) explicit
+
+```fortran
+do i = 1, size(vector)
+   factor_and_offset(i) = vector(i)*factor + offset
+end do
+```
+
+### 3) intrinsic array operation
+
+```fortran
+factor_and_offset = vector*factor + offset
+```
+
+---
+
 explit use vs generic use
 python imports
 map vs loop
