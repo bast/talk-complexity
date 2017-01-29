@@ -10,8 +10,8 @@ class: center, middle, inverse
 
 ### [UiT The Arctic University of Norway](https://uit.no)
 
-Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-Code examples: [OSI](http://opensource.org)-approved [MIT license](http://opensource.org/licenses/mit-license.html).
+Free to share and remix under [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Code examples: [MIT license](http://opensource.org/licenses/mit-license.html).
 
 Credits: [Jonas Juselius](https://github.com/juselius),
          [Roberto Di Remigio](http://totaltrash.xyz),

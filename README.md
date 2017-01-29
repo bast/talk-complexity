@@ -1,6 +1,8 @@
-Talk: [Managing complexity and modular code development](http://cicero.xyz/v2/remark/github/bast/talk-complexity/master/talk.md/).
+[Slides](http://cicero.xyz/v2/remark/github/bast/talk-complexity/master/talk.md/)
+are free to share and remix under
+[CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
-Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Code examples: [MIT license](http://opensource.org/licenses/mit-license.html).
 
 Credits: [Jonas Juselius](https://github.com/juselius),
          [Roberto Di Remigio](http://totaltrash.xyz),
