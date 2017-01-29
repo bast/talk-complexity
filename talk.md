@@ -385,12 +385,7 @@ end function
 
 ```fortran
 pure function factor_and_offset(vector, factor)
-    real(8), intent(in) :: vector(:)
-    real(8), intent(in) :: factor
-    real(8) :: factor_and_offset(size(vector))
-    integer :: i
-
-    factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
+    ! ... everything else remains unchanged
 end function
 ```
 
