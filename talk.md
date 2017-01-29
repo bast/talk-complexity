@@ -474,3 +474,26 @@ asytoread
 - Investment with late but huge return
 
 <img src="img/development-speed.svg" style="width: 500px;"/>
+
+---
+
+file-io
+pure vs normal in fortran
+argument vs common block
+explit use vs generic use
+python imports
+map vs loop
+filter vs loop
+extra arguments and ifs vs higher-order function
+object vs named tuple
+pure vs stateful
+const in c++
+intent
+implicit none
+named arguments
+__main__ vs naked code
+private vs public
+stateful vs stateless https://maryrosecook.com/blog/post/a-practical-introduction-to-functional-programming
+unnecessary if return
+narrowing scope
+scaling of complexity
