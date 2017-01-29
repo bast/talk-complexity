@@ -574,7 +574,7 @@ end function
 
 ---
 
-## Compact vs. explicit vs. intrinsic in Fortran
+## Constructor vs. explicit vs. intrinsic in Fortran
 
 ### a) array constructor
 
@@ -693,41 +693,106 @@ a = b*c
 integer, parameter :: length = 1000000
 real(8) :: distances(length)
 
-distances = get_distances()
+call get_distances(distances)
 call do_something(distances)
 
 ! now we do not need distances anymore, we can safely reuse the array
-distances = get_angles()
+call get_angles(distances)
 call do_something_else(distances)
 ```
 
-### b) no reuse
+### b) allocate twice the memory
 
 ```fortran
 integer, parameter :: length = 1000000
 real(8) :: distances(length)
 real(8) :: angles(length)
 
-distances = get_distances()
+call get_distances(distances)
 call do_something(distances)
 
-angles = get_angles()
+call get_angles(angles)
 call do_something_else(angles)
 ```
 
 ---
 
-ternary
+## Ternary operator (Python)
+
+### a) ternary
+
+```python
+index = 1 if is_odd else 2
+```
+
+### b) explicit
+
+```python
+if is_odd:
+    index = 1
+else:
+    index = 2
+```
+
+---
+
+### a) class
+
+```python
+class Pet:
+    def __init__(self, name):
+        self.name = name
+        self.hunger = 0
+    def go_for_a_walk(self):
+        self.hunger += 1
+
+my_cat = Pet('Tom')
+my_cat.go_for_a_walk()
+print(my_cat.hunger)
+```
+
+### b) named tuple
+
+```python
+from collections import namedtuple
+
+def go_for_a_walk(pet):
+    new_hunger = pet.hunger + 1
+    return pet._replace(hunger=new_hunger)
+
+Pet = namedtuple('Pet', ['name', 'hunger'])
+
+my_cat = Pet(name='Tom', hunger=0)
+my_cat = go_for_a_walk(my_cat)
+print(my_cat.hunger)
+```
+
+---
+
+## Implicit vs. named arguments
+
+### a) implicit
+
+```python
+bmi = get_bmi(90.0, 1.91))
+```
+
+### b) named
+
+```python
+bmi = get_bmi(mass_kg=90.0, height_m=1.91))
+```
+
+---
+
 explit use vs generic use
 python imports
 function level imports
 map vs loop
 filter vs loop
 extra arguments and ifs vs higher-order function
-object vs named tuple
 const in c++
 intent
-named arguments
 private vs public
 stateful vs stateless https://maryrosecook.com/blog/post/a-practical-introduction-to-functional-programming
 unnecessary if return
