@@ -564,39 +564,6 @@ call do_something_else(angles)
 
 ---
 
-## Ternary operator
-
-### a) ternary
-
-```python
-index = 1 if is_odd else 2  # python
-```
-
-```fortran
-index = merge(1, 2, is_odd)  ! fortran
-```
-
-### b) explicit
-
-```python
-# python
-if is_odd:
-    index = 1
-else:
-    index = 2
-```
-
-```fortran
-! fortran
-if (is_odd) then
-    index = 1
-else
-    index = 2
-end if
-```
-
----
-
 ### a) class
 
 ```python
@@ -630,6 +597,58 @@ print(my_cat.hunger)
 
 ---
 
+## If return
+
+### a)
+
+```python
+if a == 5:
+    return True
+else:
+    return False
+```
+
+### b)
+
+```python
+return (a == 5)
+```
+
+---
+
+## Ternary operator
+
+### a) ternary
+
+```python
+index = 1 if is_odd else 2  # python
+```
+
+```fortran
+index = merge(1, 2, is_odd)  ! fortran
+```
+
+### b) explicit
+
+```python
+# python
+if is_odd:
+    index = 1
+else:
+    index = 2
+```
+
+```fortran
+! fortran
+if (is_odd) then
+    index = 1
+else
+    index = 2
+end if
+```
+
+---
+
 ## Implicit vs. named arguments
 
 ### a) implicit
@@ -642,6 +661,36 @@ bmi = get_bmi(90.0, 1.91))
 
 ```python
 bmi = get_bmi(mass_kg=90.0, height_m=1.91))
+```
+
+---
+
+## Private vs. public
+
+### a) default is private
+
+```fortran
+module mymodule
+    implicit none
+    public myroutine
+    private
+contains
+    subroutine myroutine()
+    ...
+    end subroutine
+end module
+```
+
+### b) default is public
+
+```fortran
+module mymodule
+    implicit none
+contains
+    subroutine myroutine()
+    ...
+    end subroutine
+end module
 ```
 
 ---
@@ -693,6 +742,54 @@ def myfunction(a, b, c):
 
 ---
 
+## Intent vs. unspecified
+
+### a) intent specified
+
+```fortran
+subroutine do_something(a, b, c, d)
+    real(8), intent(in)    :: a
+    logical, intent(in)    :: b
+    real(8), intent(inout) :: c
+    real(8), intent(out)   :: d
+
+    ! ...
+end subroutine
+```
+
+### b) intent unspecified
+
+```fortran
+subroutine do_something(a, b, c, d)
+    real(8) :: a
+    logical :: b
+    real(8) :: d
+    real(8) :: d
+
+    ! ...
+end subroutine
+```
+
+---
+
+## Const in C++
+
+### a) const
+
+```cpp
+int get_buffer_len(const int max_geo_order,
+                   const int num_points) const;
+```
+
+### b) unspecified
+
+```cpp
+int get_buffer_len(int max_geo_order,
+                   int num_points);
+```
+
+---
+
 ## Map vs. loop
 
 ### a) loop
@@ -734,25 +831,6 @@ odds = filter(lambda x: x%2 == 1, numbers)
 
 ---
 
-## If return
-
-### a)
-
-```python
-if a == 5:
-    return True
-else:
-    return False
-```
-
-### b)
-
-```python
-return (a == 5)
-```
-
----
-
 ## Conditionals vs. higher-order function
 
 ### a) conditionals
@@ -776,82 +854,4 @@ def apply(x, f):
     return f(x)
 
 apply(2.0, lambda x: x**2)
-```
-
----
-
-## Intent vs. unspecified
-
-### a) intent specified
-
-```fortran
-subroutine do_something(a, b, c, d)
-    real(8), intent(in)    :: a
-    logical, intent(in)    :: b
-    real(8), intent(inout) :: c
-    real(8), intent(out)   :: d
-
-    ! ...
-end subroutine
-```
-
-### b) intent unspecified
-
-```fortran
-subroutine do_something(a, b, c, d)
-    real(8) :: a
-    logical :: b
-    real(8) :: d
-    real(8) :: d
-
-    ! ...
-end subroutine
-```
-
----
-
-## Private vs. public
-
-### a) default is private
-
-```fortran
-module mymodule
-    implicit none
-    public myroutine
-    private
-contains
-    subroutine myroutine()
-    ...
-    end subroutine
-end module
-```
-
-### b) default is public
-
-```fortran
-module mymodule
-    implicit none
-contains
-    subroutine myroutine()
-    ...
-    end subroutine
-end module
-```
-
----
-
-## Const in C++
-
-### a) const
-
-```cpp
-int get_buffer_len(const int max_geo_order,
-                   const int num_points) const;
-```
-
-### b) unspecified
-
-```cpp
-int get_buffer_len(int max_geo_order,
-                   int num_points);
 ```
