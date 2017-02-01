@@ -595,13 +595,13 @@ end if
 ### a) implicit
 
 ```python
-bmi = get_bmi(90.0, 1.91))
+bmi = get_bmi(90.0, 1.91)
 ```
 
 ### b) named
 
 ```python
-bmi = get_bmi(mass_kg=90.0, height_m=1.91))
+bmi = get_bmi(mass_kg=90.0, height_m=1.91)
 ```
 
 ---
@@ -729,7 +729,7 @@ end subroutine
 subroutine do_something(a, b, c, d)
     real(8) :: a
     logical :: b
-    real(8) :: d
+    real(8) :: c
     real(8) :: d
 
     ! ...
