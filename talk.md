@@ -1,6 +1,6 @@
 name: inverse
 layout: true
-class: center, middle, inverse
+class: middle, inverse
 
 ---
 
@@ -8,10 +8,11 @@ class: center, middle, inverse
 
 ## [Radovan Bast](http://bast.fr)
 
-### [UiT The Arctic University of Norway](https://uit.no)
+### [NeIC](https://neic.nordforsk.org)/ [UiT The Arctic University of Norway](https://uit.no)
 
 Text is free to share and remix under [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-Code examples: [MIT license](http://opensource.org/licenses/mit-license.html).
+
+Code examples: [MIT license](http://opensource.org/licenses/mit-license.html)
 
 Credits: [Jonas Juselius](https://github.com/juselius),
          [Roberto Di Remigio](http://totaltrash.xyz),
@@ -82,7 +83,7 @@ layout: false
 
 ---
 
-## Coupling and cohesion
+## Prefer loose coupling and high cohesion
 
 - Strong coupling
 
@@ -96,7 +97,7 @@ layout: false
 
 ---
 
-## Coupling and cohesion
+## Prefer loose coupling and high cohesion
 
 - Low cohesion: difficult to maintain, test, reuse, or even understand
     - Non-cohesive code has unnecessary dependencies
@@ -111,15 +112,6 @@ layout: false
     - Microservices
 
 ![](img/high-cohesion.svg)
-
----
-
-## Coupling and cohesion
-
-- Minimize dependencies
-- Prefer loose coupling and high cohesion
-
-<img src="img/wires.jpg" style="width: 500px;"/>
 
 ---
 
@@ -202,7 +194,18 @@ layout: false
 
 ## Equational reasoning
 
-Write me ...
+- We take a simple function:
+  $$ f(x) = x^2 $$
+- We wish to evaluate this:
+  $$ y = f(4) + f(3) \times [f(2) - f(2)] $$
+- We can simplify:
+  $$ y = f(4) + f(3) \times 0 $$
+  $$ y = f(4) $$
+  $$ y = 16 $$
+- Another example:
+  $$ z = f(1) + f(2) + f(3) + f(4) $$
+- We know we can rearrange (important for concurrency):
+  $$ z = f(2) + f(4) + f(3) + f(1) $$
 
 ---
 
@@ -276,8 +279,6 @@ template: inverse
   - modules
   - packages (Python) or libraries (C or or C++ or Fortran)
 
----
-
 ## Functions, functions, functions
 
 - Build your code from functions
@@ -315,8 +316,6 @@ template: inverse
 - Import only the functionality that you need
 - Import only where you need it
 - Export as little functionality as possible
-
----
 
 ## Naming things
 
