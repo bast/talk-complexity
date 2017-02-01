@@ -197,15 +197,14 @@ layout: false
 - We take a simple function:
   $$ f(x) = x^2 $$
 - We wish to evaluate this:
-  $$ y = f(4) + f(3) \times [f(2) - f(2)] $$
+  $$ y = f(a) + f(b) \times [f(c) - f(c)] $$
 - We can simplify:
-  $$ y = f(4) + f(3) \times 0 $$
-  $$ y = f(4) $$
-  $$ y = 16 $$
+  $$ y = f(a) + f(b) \times 0 $$
+  $$ y = f(a) $$
 - Another example:
-  $$ z = f(1) + f(2) + f(3) + f(4) $$
+  $$ z = f(a) + f(b) + f(c) + f(d) $$
 - We know we can rearrange (important for concurrency):
-  $$ z = f(2) + f(4) + f(3) + f(1) $$
+  $$ z = f(b) + f(d) + f(c) + f(a) $$
 
 ---
 
