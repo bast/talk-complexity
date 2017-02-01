@@ -855,3 +855,11 @@ my_cat = Pet(name='Tom', hunger=0)
 my_cat = go_for_a_walk(my_cat)
 print(my_cat.hunger)
 ```
+
+---
+
+## Conclusions
+
+- Modular and well structured code is easy to test
+- Entangled code is difficult to test
+- Introduce testing early - it will automatically guide you towards a good code structure
