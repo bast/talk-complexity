@@ -340,6 +340,65 @@ template: inverse
 
 ---
 
+## Pure vs. stateful
+
+### a) pure
+
+```python
+# function which computes the body mass index
+def get_bmi(mass_kg, height_m):
+    return mass_kg/(height_m**2)
+
+# compute the body mass index
+bmi = get_bmi(mass_kg=90.0, height_m=1.91))
+```
+
+### b) stateful
+
+```python
+mass_kg = 90.0
+height_m = 1.91
+bmi = 0.0
+
+# function which computes the body mass index
+def get_bmi():
+    global bmi
+    bmi = mass_kg/(height_m**2)
+
+# compute the body mass index
+get_bmi()
+```
+
+---
+
+## Main function vs. global scope in Python
+
+### a) main function
+
+```python
+def do_something(input):
+    return something
+
+def main():
+    result = do_something(input)
+    do_something_else(result)
+
+if __name__ == '__main__':
+    main()
+```
+
+### b) global scope
+
+```python
+def do_something(input):
+    return something
+
+result = do_something(input)
+do_something_else(result)
+```
+
+---
+
 ## Pure vs. default in Fortran
 
 ### a) default
@@ -420,65 +479,6 @@ result = vector*factor + offset
 
 ---
 
-## Pure vs. stateful
-
-### a) pure
-
-```python
-# function which computes the body mass index
-def get_bmi(mass_kg, height_m):
-    return mass_kg/(height_m**2)
-
-# compute the body mass index
-bmi = get_bmi(mass_kg=90.0, height_m=1.91))
-```
-
-### b) stateful
-
-```python
-mass_kg = 90.0
-height_m = 1.91
-bmi = 0.0
-
-# function which computes the body mass index
-def get_bmi():
-    global bmi
-    bmi = mass_kg/(height_m**2)
-
-# compute the body mass index
-get_bmi()
-```
-
----
-
-## Main function vs. global scope in Python
-
-### a) main function
-
-```python
-def do_something(input):
-    return something
-
-def main():
-    result = do_something(input)
-    do_something_else(result)
-
-if __name__ == '__main__':
-    main()
-```
-
-### b) global scope
-
-```python
-def do_something(input):
-    return something
-
-result = do_something(input)
-do_something_else(result)
-```
-
----
-
 ## Implicit vs. implicit none in Fortran
 
 ### a) implicit
@@ -539,64 +539,6 @@ call do_something_else(angles)
 
 ---
 
-## File I/O (example: Python)
-
-### a) pass file name
-
-```python
-result = parse_input1(file_name)
-```
-
-### b) pass file handle
-
-```python
-with open(file_name, 'r') as f:
-    result = parse_input2(f)
-```
-
-### c) pass data
-
-```python
-with open(file_name, 'r') as f:
-    input_lines = f.readlines()
-    result = parse_input3(input_lines)
-```
-
----
-
-### a) class
-
-```python
-class Pet:
-    def __init__(self, name):
-        self.name = name
-        self.hunger = 0
-    def go_for_a_walk(self):
-        self.hunger += 1
-
-my_cat = Pet('Tom')
-my_cat.go_for_a_walk()
-print(my_cat.hunger)
-```
-
-### or b) named tuple
-
-```python
-from collections import namedtuple
-
-def go_for_a_walk(pet):
-    new_hunger = pet.hunger + 1
-    return pet._replace(hunger=new_hunger)
-
-Pet = namedtuple('Pet', ['name', 'hunger'])
-
-my_cat = Pet(name='Tom', hunger=0)
-my_cat = go_for_a_walk(my_cat)
-print(my_cat.hunger)
-```
-
----
-
 ## If return
 
 ### a)
@@ -621,11 +563,11 @@ return (a == 5)
 ### a) ternary
 
 ```python
-index = 1 if is_odd else 2  # python
+i = 1 if is_odd else 2  # python
 ```
 
 ```fortran
-index = merge(1, 2, is_odd)  ! fortran
+i = merge(1, 2, is_odd)  ! fortran
 ```
 
 ### b) explicit
@@ -633,17 +575,17 @@ index = merge(1, 2, is_odd)  ! fortran
 ```python
 # python
 if is_odd:
-    index = 1
+    i = 1
 else:
-    index = 2
+    i = 2
 ```
 
 ```fortran
 ! fortran
 if (is_odd) then
-    index = 1
+    i = 1
 else
-    index = 2
+    i = 2
 end if
 ```
 
@@ -661,6 +603,31 @@ bmi = get_bmi(90.0, 1.91))
 
 ```python
 bmi = get_bmi(mass_kg=90.0, height_m=1.91))
+```
+
+---
+
+## File I/O (example: Python)
+
+### a) pass file name
+
+```python
+result = parse_input1(file_name)
+```
+
+### b) pass file handle
+
+```python
+with open(file_name, 'r') as f:
+    result = parse_input2(f)
+```
+
+### c) pass data
+
+```python
+with open(file_name, 'r') as f:
+    input_lines = f.readlines()
+    result = parse_input3(input_lines)
 ```
 
 ---
@@ -854,4 +821,37 @@ def apply(x, f):
     return f(x)
 
 apply(2.0, lambda x: x**2)
+```
+
+---
+
+### a) class
+
+```python
+class Pet:
+    def __init__(self, name):
+        self.name = name
+        self.hunger = 0
+    def go_for_a_walk(self):
+        self.hunger += 1
+
+my_cat = Pet('Tom')
+my_cat.go_for_a_walk()
+print(my_cat.hunger)
+```
+
+### vs. b) named tuple (in Python)
+
+```python
+from collections import namedtuple
+
+def go_for_a_walk(pet):
+    new_hunger = pet.hunger + 1
+    return pet._replace(hunger=new_hunger)
+
+Pet = namedtuple('Pet', ['name', 'hunger'])
+
+my_cat = Pet(name='Tom', hunger=0)
+my_cat = go_for_a_walk(my_cat)
+print(my_cat.hunger)
 ```
