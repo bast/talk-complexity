@@ -340,31 +340,6 @@ template: inverse
 
 ---
 
-## File I/O (example: Python)
-
-### a) pass file name
-
-```python
-result = parse_input1(file_name)
-```
-
-### b) pass file handle
-
-```python
-with open(file_name, 'r') as f:
-    result = parse_input2(f)
-```
-
-### c) pass data
-
-```python
-with open(file_name, 'r') as f:
-    input_lines = f.readlines()
-    result = parse_input3(input_lines)
-```
-
----
-
 ## Pure vs. default in Fortran
 
 ### a) default
@@ -560,6 +535,31 @@ call do_something(distances)
 
 call get_angles(angles)
 call do_something_else(angles)
+```
+
+---
+
+## File I/O (example: Python)
+
+### a) pass file name
+
+```python
+result = parse_input1(file_name)
+```
+
+### b) pass file handle
+
+```python
+with open(file_name, 'r') as f:
+    result = parse_input2(f)
+```
+
+### c) pass data
+
+```python
+with open(file_name, 'r') as f:
+    input_lines = f.readlines()
+    result = parse_input3(input_lines)
 ```
 
 ---
