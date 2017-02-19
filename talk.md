@@ -360,6 +360,39 @@ asytoread
 
 ---
 
+## Recommendations for C++
+
+(thanks to [Roberto Di Remigio](http://totaltrash.xyz) for this list)
+
+- Read [CppCoreGuidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines).
+- Use C++11 and show the finger to obsolete compilers.
+- Use CMake >= 3.2 as build system to enforce strict standard compliance of
+  your code. Bonus: you can use C++14 whenever possible and have safe fallbacks.
+- Consider very carefully whether you want to depend on the Boost library.
+- Do not use C constructs in C++ code.
+- Know the STL, 'cause the STL is your friend and will always be.
+- Use algorithms from the <algorithm> header whenever possible.
+- Use functional constructs from the <functional> header whenever possible.
+- Use tuples for multiple return values whenever it makes sense (avoid doing
+  pointer and/or reference tricks to get more stuff out of a function because it
+  will mess up your head).
+- Use Doxygen. Even just Doxygen-style comments are fine.
+
+---
+
+## Simplicity and clarity before elegance before efficiency
+
+- Do not optimize
+- If you have to optimize, optimize later
+- If you have to optimize, measure, do not guess
+
+### Reading sessions
+
+- Introduce code reading sessions in your group
+- Read sources written by others
+
+---
+
 template: inverse
 
 ## Quiz
