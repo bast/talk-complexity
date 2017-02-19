@@ -284,6 +284,7 @@ template: inverse
   - if you find it hard to name a function
 - A function that performs a single operation is simpler to
   understand, test, and reuse
+- A function that does not fit on one screen is too long
 
 ---
 
@@ -391,9 +392,13 @@ asytoread
 - If you have to optimize, optimize later
 - If you have to optimize, measure, do not guess
 
+### Simple is better than complex
+
+- If you cannot understand or explain a function on a cold gray Monday morning before coffee, it is too complex. (Quote adapted from [Pieter Hintjens, Social Architecture, 2009](https://www.gitbook.com/book/hintjens/social-architecture/details))
+
 ---
 
-### More recommendations
+## More recommendations
 
 - Introduce code reading sessions in your group
 - Read sources written by others
