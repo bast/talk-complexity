@@ -100,13 +100,13 @@ layout: false
 ## Prefer loose coupling and high cohesion
 
 - Low cohesion: difficult to maintain, test, reuse, or even understand
-    - Non-cohesive code has unnecessary dependencies
+    - Non-cohesive code introduces unnecessary dependencies
     - Swiss army knife modules
 
 ![](img/low-cohesion.svg)
 
-- High cohesion: associated with robustness, reliability, reusability, and understandability
-    - Do one thing only and do it well
+- High cohesion: robust, reliable, reusable, understandable
+    - **Do one thing only and do it well**
     - API of cohesive code changes less over time
     - Power of the Unix command line is a set of highly cohesive tools
     - Microservices
@@ -194,8 +194,8 @@ layout: false
 
 ## Equational reasoning
 
-- We take a simple function:
-  $$ f(x) = x^2 $$
+- We start with a function:
+  $$ f(x) $$
 - We wish to evaluate this:
   $$ y = f(a) + f(b) \times [f(c) - f(c)] $$
 - We can simplify:
@@ -255,7 +255,7 @@ layout: false
 - Always read/write on the outside and pass data
 - Do not read/write deep down inside the code
 - Keep the inside of your code pure/stateless
-- Move all the state "up" to the caller
+- Move all the state to the outside of your code
 - Keep the stateful outside shell thin
 - Unit test the inside
 - Regression test the shell
