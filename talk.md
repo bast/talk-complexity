@@ -617,8 +617,8 @@ with open(file_name, 'r') as f:
 ```fortran
 module mymodule
     implicit none
-    public myroutine
-    private
+    public myroutine  ! added these
+    private           ! two lines
 contains
     subroutine myroutine()
     ...
