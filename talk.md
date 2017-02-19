@@ -374,12 +374,12 @@ template: inverse
 
 ```python
 def do_something(input):
+    # ...
     return something
 
 def main():
-    input = read_input()
-    result = do_something(input)
-    do_something_else(result)
+    result = do_something(2.0)
+    print(result)
 
 if __name__ == '__main__':
     main()
@@ -389,11 +389,11 @@ if __name__ == '__main__':
 
 ```python
 def do_something(input):
+    # ...
     return something
 
-input = read_input()
-result = do_something(input)
-do_something_else(result)
+result = do_something(2.0)
+print(result)
 ```
 
 ---
