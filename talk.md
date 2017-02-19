@@ -208,6 +208,7 @@ get_bmi()
 - Concurrency in imperative code is very hard
 - You are totally lost in the dark without a good thread checker
 - In a pure, immutable world concurrency is nearly trivial!
+- Prefer immutable data to mutable data
 
 <img src="img/floor-loom-diagram.jpg" style="width: 55%;"/>
 
@@ -281,6 +282,8 @@ template: inverse
   - if a function gets too long
   - if a function does more than one thing
   - if you find it hard to name a function
+- A function that performs a single operation is simpler to
+  understand, test, and reuse
 
 ---
 
@@ -382,14 +385,20 @@ asytoread
 
 ## Simplicity and clarity before elegance before efficiency
 
+### Avoid premature optimization
+
 - Do not optimize
 - If you have to optimize, optimize later
 - If you have to optimize, measure, do not guess
 
-### Reading sessions
+---
+
+### More recommendations
 
 - Introduce code reading sessions in your group
 - Read sources written by others
+- Apply [YAGNI](https://en.wikipedia.org/wiki/You_aren't_gonna_need_it) principle
+- Do not postpone to run time what can be done well at compile time
 
 ---
 
