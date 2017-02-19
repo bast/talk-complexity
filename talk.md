@@ -812,4 +812,4 @@ print(my_cat.hunger)
 
 - Modular and well structured code is easy to test
 - Entangled code is difficult to test
-- Introduce testing early - it will automatically guide you towards a good code structure
+- Introduce testing early - it will **automatically guide you towards a modular and well structured code**
