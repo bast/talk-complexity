@@ -396,58 +396,56 @@ do_something_else(result)
 
 ---
 
-## Pure vs. default in Fortran
+## Pure attribute in Fortran
 
 ### a) default
 
 ```fortran
-function factor_and_offset(vector, factor)
-    real(8), intent(in) :: vector(:)
-    real(8), intent(in) :: factor
-    real(8) :: factor_and_offset(size(vector))
-    integer :: i
-
-    factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
+function my_function(a, b)
+    ! ... function that happens to have no side effects
 end function
+
+subroutine my_subroutine(a, b, c)
+    ! ... subroutine that happens to have no side effects
+end subroutine
 ```
 
 ### b) with "pure" attribute
 
 ```fortran
-pure function factor_and_offset(vector, factor)
-    ! ... everything else remains unchanged
+pure function my_function(a, b)
+    ! ... function body unchanged
 end function
+
+pure subroutine my_subroutine(a, b, c)
+    ! ... subroutine body unchanged
+end subroutine
 ```
 
 ---
 
-## Argument vs. global
+## Argument vs. global input (example: R)
 
 ### a) "offset" passed as argument
 
-```fortran
-function factor_and_offset(vector, factor, offset)
-    real(8), intent(in) :: vector(:)
-    real(8), intent(in) :: factor
-    real(8), intent(in) :: offset
-    real(8) :: factor_and_offset(size(vector))
-    integer :: i
+```r
+factor_and_offset1 <- function (x, factor, offset) {
+    x*factor + offset
+}
 
-    factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
-end function
+a <- factor_and_offset1(2.0, 3.0, 4.0)
 ```
 
 ### b) "offset" defined in outer scope
 
-```fortran
-function factor_and_offset(vector, factor)
-    real(8), intent(in) :: vector(:)
-    real(8), intent(in) :: factor
-    real(8) :: factor_and_offset(size(vector))
-    integer :: i
+```r
+offset <- 4.0
 
-    factor_and_offset = (/(vector(i)*factor + offset, i = 1, size(vector))/)
-end function
+factor_and_offset2 <- function (x, factor) {
+    x*factor + offset
+}
+
+a <- factor_and_offset2(2.0, 3.0)
 ```
 
 ---
@@ -536,25 +534,6 @@ call do_something_else(angles)
 
 ---
 
-## If return
-
-### a)
-
-```python
-if a == 5:
-    return True
-else:
-    return False
-```
-
-### b)
-
-```python
-return (a == 5)
-```
-
----
-
 ## Ternary operator
 
 ### a) ternary
@@ -567,6 +546,10 @@ i = 1 if is_odd else 2  # python
 i = merge(1, 2, is_odd)  ! fortran
 ```
 
+```cpp
+int i = (is_odd) ? 1 : 2;  // C++
+```
+
 ### b) explicit
 
 ```python
@@ -577,14 +560,7 @@ else:
     i = 2
 ```
 
-```fortran
-! fortran
-if (is_odd) then
-    i = 1
-else
-    i = 2
-end if
-```
+Similar for Fortran and C++.
 
 ---
 
@@ -609,6 +585,7 @@ bmi = get_bmi(mass_kg=90.0, height_m=1.91)
 ### a) pass file name
 
 ```python
+# parse_input1 function opens and reads the file
 result = parse_input1(file_name)
 ```
 
@@ -616,6 +593,7 @@ result = parse_input1(file_name)
 
 ```python
 with open(file_name, 'r') as f:
+    # parse_input2 reads the file
     result = parse_input2(f)
 ```
 
@@ -624,12 +602,13 @@ with open(file_name, 'r') as f:
 ```python
 with open(file_name, 'r') as f:
     input_lines = f.readlines()
+    # parse_input3 does not know anything about the file
     result = parse_input3(input_lines)
 ```
 
 ---
 
-## Private vs. public
+## Private vs. public (Fortran)
 
 ### a) default is private
 
@@ -736,60 +715,29 @@ end subroutine
 
 ---
 
-## Const in C++
-
-### a) const
-
-```cpp
-int get_buffer_len(const int max_geo_order,
-                   const int num_points) const;
-```
-
-### b) unspecified
-
-```cpp
-int get_buffer_len(int max_geo_order,
-                   int num_points);
-```
-
----
-
-## Map vs. loop
+## Loop vs. map/filter
 
 ### a) loop
 
 ```python
 numbers = [1, 2, 3, 4, 5]
+
 squares = []
 for number in numbers:
     squares.append(number**2)
-```
 
-### b) map
-
-```python
-numbers = [1, 2, 3, 4, 5]
-squares = map(lambda x: x**2, numbers)
-```
-
----
-
-## Filter vs. loop
-
-### a) loop
-
-```python
-numbers = [1, 2, 3, 4, 5]
 odds = []
 for number in numbers:
     if number%2 == 1:
         odds.append(number)
 ```
 
-### b) filter
+### b) map and filter
 
 ```python
 numbers = [1, 2, 3, 4, 5]
+
+squares = map(lambda x: x**2, numbers)
 odds = filter(lambda x: x%2 == 1, numbers)
 ```
 
@@ -800,24 +748,27 @@ odds = filter(lambda x: x%2 == 1, numbers)
 ### a) conditionals
 
 ```python
-def apply(x, square=False, double=False):
-    if square:
-        return x**2
-    elif double:
-        return 2.0*x
+def apply(x, option_a=False, option_b=False):
+    parameter = 137
+    if option_a:
+        return complicated_function_a(x, parameter)
+    elif option_b:
+        return complicated_function_b(x, parameter)
     else
-        # do something else
+        # FIXME we should stop here
+        pass
 
-apply(2.0, square=True)
+apply(2.0, option_a=True)
 ```
 
 ### b) higher-order function
 
 ```python
 def apply(x, f):
-    return f(x)
+    parameter = 137
+    return f(x, parameter)
 
-apply(2.0, lambda x: x**2)
+apply(2.0, complicated_function_a)
 ```
 
 ---
