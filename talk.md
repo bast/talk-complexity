@@ -130,6 +130,37 @@ layout: false
 
 ---
 
+## Example: pure vs. stateful
+
+### a) pure
+
+```python
+# function which computes the body mass index
+def get_bmi(mass_kg, height_m):
+    return mass_kg/(height_m**2)
+
+# compute the body mass index
+bmi = get_bmi(mass_kg=90.0, height_m=1.91))
+```
+
+### b) stateful
+
+```python
+mass_kg = 90.0
+height_m = 1.91
+bmi = 0.0
+
+# function which computes the body mass index
+def get_bmi():
+    global bmi
+    bmi = mass_kg/(height_m**2)
+
+# compute the body mass index
+get_bmi()
+```
+
+---
+
 ## Enemy of the state
 
 .left-column[
@@ -332,37 +363,6 @@ template: inverse
 ## Quiz
 
 ### Decide which alternative you like better and discuss why
-
----
-
-## Pure vs. stateful
-
-### a) pure
-
-```python
-# function which computes the body mass index
-def get_bmi(mass_kg, height_m):
-    return mass_kg/(height_m**2)
-
-# compute the body mass index
-bmi = get_bmi(mass_kg=90.0, height_m=1.91))
-```
-
-### b) stateful
-
-```python
-mass_kg = 90.0
-height_m = 1.91
-bmi = 0.0
-
-# function which computes the body mass index
-def get_bmi():
-    global bmi
-    bmi = mass_kg/(height_m**2)
-
-# compute the body mass index
-get_bmi()
-```
 
 ---
 
