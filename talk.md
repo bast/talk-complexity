@@ -481,10 +481,10 @@ result = vector*factor + offset
 ### a) implicit
 
 ```fortran
-b = 2.0d0
-c = 3.0d0
+dmass = 2.0d0
+acceleration = 3.0d0
 
-a = b*c
+force = dmass*acceleration
 ```
 
 ### b) implicit none
@@ -492,14 +492,14 @@ a = b*c
 ```fortran
 implicit none
 
-real(8) :: a
-real(8) :: b
-real(8) :: c
+real(8) :: mass
+real(8) :: acceleration
+real(8) :: force
 
-b = 2.0d0
-c = 3.0d0
+mass = 2.0d0
+acceleration = 3.0d0
 
-a = b*c
+force = mass*acceleration
 ```
 
 ---
