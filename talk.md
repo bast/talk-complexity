@@ -494,6 +494,30 @@ a <- factor_and_offset2(2.0, 3.0)
 
 ---
 
+## Explicit interface vs. invisible dependencies (C++)
+
+(example taken from [CppCoreGuidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#a-nameri-explicitai1-make-interfaces-explicit))
+
+### a)
+
+```cpp
+int rnd(double d)
+{
+    return (rnd_up) ? ceil(d) : d;
+}
+```
+
+### b)
+
+```cpp
+int rnd(double d, bool rnd_up)
+{
+    return (rnd_up) ? ceil(d) : d;
+}
+```
+
+---
+
 ## Constructor vs. explicit vs. intrinsic in Fortran
 
 ### a) array constructor
