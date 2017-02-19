@@ -115,44 +115,6 @@ layout: false
 
 ---
 
-## Must haves 1/2
-
-### Encapsulation
-
-- Hide internals by language or by convention (header file in C/C++,
-  public/private in Fortran, underscores in Python)
-- "Python has no locked doors; it's a consenting adults language.
-  If you open the door you're responsible for what you see." [R. Hettinger]
-- Expose the "what", hide the "how"
-
-### Documentation
-
-- Separate the "what it can do" from "how is it implemented"
-- Document your API
-- Version your API ([semantic](http://semver.org) or [sentimental](http://sentimentalversioning.org)
-  or [romantic](https://github.com/jashkenas/backbone/issues/2888#issuecomment-29076249) versioning)
-
----
-
-## Must haves 2/2
-
-### Testable on its own
-
-- Sharpens interfaces
-- Once you start testing your library you really see the coupling and cohesion
-- Increases development speed
-
-### Built on its own
-
-- Prerequisite for testable on its own
-
-### Own development history
-
-- Decouple the development history
-- Each unit should have its own Git history/repository
-
----
-
 ## Purity
 
 - Pure functions has no notion of state: They take input values and return
@@ -328,6 +290,40 @@ template: inverse
 Makecodee
 asytoread
 ```
+
+---
+
+## Encapsulation
+
+- Hide internals by language or by convention (header file in C/C++,
+  public/private in Fortran, underscores in Python)
+- "Python has no locked doors; it's a consenting adults language.
+  If you open the door you're responsible for what you see." [R. Hettinger]
+- Expose the "what", hide the "how"
+
+## Documentation
+
+- Separate the "what it can do" from "how is it implemented"
+- Document your API
+- Version your API ([semantic](http://semver.org) or [sentimental](http://sentimentalversioning.org)
+  or [romantic](https://github.com/jashkenas/backbone/issues/2888#issuecomment-29076249) versioning)
+
+---
+
+## Modules testable on its own
+
+- Sharpens interfaces
+- Once you start testing your library you really see the coupling and cohesion
+- Increases development speed
+
+## Libraries built on its own
+
+- Prerequisite for testable on its own
+
+## Libraries have own development history
+
+- Decouple the development history
+- Each unit should have its own Git history/repository
 
 ---
 
