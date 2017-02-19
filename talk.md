@@ -377,6 +377,7 @@ def do_something(input):
     return something
 
 def main():
+    input = read_input()
     result = do_something(input)
     do_something_else(result)
 
@@ -390,6 +391,7 @@ if __name__ == '__main__':
 def do_something(input):
     return something
 
+input = read_input()
 result = do_something(input)
 do_something_else(result)
 ```
