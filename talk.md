@@ -181,6 +181,8 @@ get_bmi()
     - Optimize
 
 ### But we need to deal with state somewhere
+
+- Examples later in this talk
 ]
 
 ---
