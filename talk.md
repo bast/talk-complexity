@@ -28,7 +28,7 @@ layout: false
 
 ---
 
-## Complexity
+## The front panel: many dependencies
 
 <img src="img/joe-paradiso-modular-synth-front.jpg" style="height: 450px;"/>
 
@@ -36,15 +36,15 @@ layout: false
 
 ---
 
-## Complexity
-
-- The back side: global variables
+## The back side: global variables
 
 <img src="img/joe-paradiso-modular-synth-back.jpg" style="height: 450px;"/>
 
 (c) Joe Paradiso
 
 ---
+
+## Simple vs. easy
 
 <img src="img/development-speed.svg" style="width: 80%;"/>
 
@@ -117,11 +117,11 @@ layout: false
 
 ## Purity
 
-- Pure functions has no notion of state: They take input values and return
+- Pure functions have no notion of state: They take input values and return
   values
-- Given the same input, a pure function *always* returns the same value!
-  Function calls can be optimized away!
-- Pure function == data!
+- Given the same input, a pure function *always* returns the same value
+- Function calls can be optimized away
+- Pure function == data
 - Purity is key to equational reasoning
 
 <img src="img/bugbarrier.jpg" style="width: 40%;"/>
@@ -288,12 +288,12 @@ template: inverse
 
 ---
 
-## C interface
+## C interface for libraries
 
 - English is to humans what C is to programs
 - C is the common language
 - Basically any language can talk to a C interface
-- **Do create a C interface for your code**
+- **Create a C interface for your code**
 - Better than Fortran interface (the latter imposes compilation
   order and introduces compiler dependence)
 
