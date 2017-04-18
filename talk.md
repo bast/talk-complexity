@@ -24,7 +24,15 @@ layout: false
 
 ## Complexity
 
+.left-column[
 <img src="img/complex-machine.jpg" style="height: 500px;"/>
+]
+.right-column[
+- The complexity of software is an essential property, not an accidental one [Fred Brooks].
+- We start with a simple idea and overtime software grows complex.
+]
+
+
 
 ---
 
