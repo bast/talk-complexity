@@ -32,7 +32,10 @@ layout: false
 - We start with a simple idea and overtime software grows complex.
 ]
 
-
+---
+## Software grows complex over time
+- It is inherent characteristic of software to change and grow over time
+- There is no silver bullet for managing complexity. However, there are some bad practices that we can avoid.
 
 ---
 
@@ -103,6 +106,62 @@ layout: false
 
 ![](img/loose-coupling.svg)
 
+---
+
+## Example: tight coupling
+
+```python
+#format 000000-0000
+
+def check_ssn(ssn):
+
+    ssn_valid = True
+
+    # check if left six characters is number
+    if left_char(ssn):
+        ssn_valid = True
+    else:
+        ssn_valid = False
+
+    # check if right four characters is number
+    if right_char(ssn):
+        ssn_valid = True
+    else:
+        ssn_valid = False
+
+    # if ssn is valid return user data
+
+    if ssn_valid:
+        return "SELECT NAME FROM USERS WHERE ssn_number=ssn"
+    else:
+        return None
+
+def left_char(ssn):
+    # do something
+    return True
+
+
+def right_char(ssn):
+    #do something
+    return True
+```
+---
+## Example: improving bad design
+
+```python
+
+def check_ssn(ssn):
+    if verify(ssn):
+        return database_find(ssn)
+    else:
+        return None
+
+def verify(ssn):
+    ## do something
+
+def database_find(ssn):
+    ## do something
+```
 ---
 
 ## Prefer loose coupling and high cohesion
@@ -271,7 +330,11 @@ get_bmi()
 template: inverse
 
 ## Recommendations
-
+---
+## Refinement
+- When we write papers we write several drafts
+- While developing software, we also need to do continuous refinement
+- Duplication in software is always abad idea
 ---
 
 ## Divide and conquer
