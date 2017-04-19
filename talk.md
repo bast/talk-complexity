@@ -34,6 +34,8 @@ layout: false
 
 ---
 ## Software grows complex over time
+
+<img src="img/software_growth.jpg" style="height: 400px;"/>
 - It is inherent characteristic of software to change and grow over time
 - There is no silver bullet for managing complexity. However, there are some bad practices that we can avoid.
 
@@ -111,8 +113,7 @@ layout: false
 ## Example: tight coupling
 
 ```python
-#format 000000-0000
-
+#function to check ssn format 000000-0000 is valid
 def check_ssn(ssn):
 
     ssn_valid = True
