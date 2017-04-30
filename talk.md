@@ -6,7 +6,7 @@ class: middle, inverse
 
 # Managing complexity and modular code development
 
-## [Radovan Bast](http://bast.fr)
+## [Radovan Bast](http://bast.fr) and Harsha Vathsavayi
 
 ### [NeIC](https://neic.nordforsk.org)/ [UiT The Arctic University of Norway](https://uit.no)
 
@@ -24,18 +24,17 @@ layout: false
 
 ## Complexity
 
-.left-column[
-<img src="img/complex-machine.jpg" style="height: 500px;"/>
-]
-.right-column[
-- The complexity of software is an essential property, not an accidental one [Fred Brooks].
-- We start with a simple idea and overtime software grows complex.
-]
+<img src="img/complex-machine.jpg" style="height: 400px;width:500px"/>
+
+_"The complexity of software is an essential property, not an accidental one [Fred Brooks](http://worrydream.com/refs/Brooks-NoSilverBullet.pdf)."_
+
 
 ---
 ## Software grows complex over time
+- We start with a simple idea and overtime software grows complex
 
 <img src="img/software_growth.jpg" style="height: 400px;"/>
+
 - It is inherent characteristic of software to change and grow over time
 - There is no silver bullet for managing complexity. However, there are some bad practices that we can avoid.
 
@@ -110,58 +109,54 @@ layout: false
 
 ---
 
-## Example: tight coupling
+## Example: strong coupling
+```
+# Function to check if users with date of birth already (#00-00-0000) exists
 
-```python
-#function to check ssn format 000000-0000 is valid
-def check_ssn(ssn):
+Procedure DATE Check
+Begin
+If is_Number(Left_Two_Chars)
+Then
+Result=0
+Else
+Result =1
 
-    ssn_valid = True
+If is_Number(Middle_Two_Chars)
+Then
+Result=0
+Else
+Result =1
 
-    # check if left six characters is number
-    if left_char(ssn):
-        ssn_valid = True
-    else:
-        ssn_valid = False
+If is_Number(Right_Four_Chars)
+Then
+Result=0
+Else
+Result =1
 
-    # check if right four characters is number
-    if right_char(ssn):
-        ssn_valid = True
-    else:
-        ssn_valid = False
+If Result=0
+Then
+Count = “SELECT DATE_OF_BIRTH FROM USERS WHERE birthday=DATE”
+Else
+Print “This is not a valid DATE”
 
-    # if ssn is valid return user data
-
-    if ssn_valid:
-        return "SELECT NAME FROM USERS WHERE ssn_number=ssn"
-    else:
-        return None
-
-def left_char(ssn):
-    # do something
-    return True
-
-
-def right_char(ssn):
-    #do something
-    return True
+End
 ```
 ---
 ## Example: improving bad design
 
-```python
+```
+# Separating the validation and database access
 
-def check_ssn(ssn):
-    if verify(ssn):
-        return database_find(ssn)
-    else:
-        return None
+Procedure DATE Check
+Begin
+Result = Verify(DATE)
+If Result=0
+Then
+Count=Database_Find(DATE)
+Else
+Print “This is not a valid DATE”
 
-def verify(ssn):
-    ## do something
-
-def database_find(ssn):
-    ## do something
+End
 ```
 ---
 
@@ -180,6 +175,15 @@ def database_find(ssn):
     - Microservices
 
 ![](img/high-cohesion.svg)
+
+---
+
+
+## Refactoring
+- Rewriting and reorganizing the code in such a way that it does not alter the external behaviour of the system [Martin Fowler](https://www.csie.ntu.edu.tw/~r95004/Refactoring_improving_the_design_of_existing_code.pdf)
+- Improves code readability and reduces complexity
+- Minimizes the chances of introducing new bugs
+- Makes future changes easy
 
 ---
 
@@ -328,15 +332,15 @@ get_bmi()
 
 ---
 
+
 template: inverse
 
 ## Recommendations
 ---
-## Refinement
-- When we write papers we write several drafts
-- While developing software, we also need to do continuous refinement
-- Duplication in software is always abad idea
----
+
+## Continuous refinement
+- Several drafts are written before submitting a paper
+- While developing software, continuous refinement is necessary
 
 ## Divide and conquer
 
@@ -346,6 +350,7 @@ template: inverse
   - modules
   - packages (Python) or libraries (C or or C++ or Fortran)
 
+---
 ## Functions, functions, functions
 
 - Build your code from functions
@@ -387,6 +392,7 @@ template: inverse
 - Import only where you need it
 - Export as little functionality as possible
 
+
 ## Naming things
 
 - Use meaningful names
@@ -396,8 +402,7 @@ template: inverse
 - Write comments in English
 
 ```
-Makecodee
-asytoread
+getlnm()     vs     getlastname()
 ```
 
 ---
@@ -434,6 +439,50 @@ asytoread
 - Decouple the development history
 - Each unit should have its own Git history/repository
 
+---
+
+## Structuring large applications
+
+### python - packages
+```pythons
+Graphics/                       Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              __init__.py
+              jpeg.py
+              png.py
+              gif.py
+              ...
+      actions/                  Subpackage for sound effects
+              __init__.py
+              zoom.py
+              crop.py
+              reverse.py
+              
+```
+---
+
+## Project layout 
+
+```python
+travelkit/
+|-- LICENSE
+|-- README.md
+|-- docs
+|   |-- index.rst
+|   |-- ... 
+|   |-- ...
+|-- requirements.txt
+|-- travelkit
+|   |-- __init__.py
+|   |-- main.py
+|   |-- test
+|       |-- baic_test.py
+|       |-- advanced_tests.py
+|-- setup.py
+```
+
+(based on [open-sourcing a python project right way](https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way ))
 ---
 
 ## Recommendations for C++
@@ -487,6 +536,7 @@ template: inverse
 
 ---
 
+
 ## Main function vs. global scope in Python
 
 ### a) main function
@@ -516,7 +566,7 @@ print(result)
 ```
 
 ---
-
+ 
 ## Pure attribute in Fortran
 
 ### a) default
@@ -570,6 +620,119 @@ a <- factor_and_offset2(2.0, 3.0)
 ```
 
 ---
+## Removing duplication
+
+### How can we avoid duplication in the following code sample?
+
+```
+Procedure Move_Left
+Begin
+car.Move("L")
+print "car moved left"
+End
+
+Procedure Move_Right
+Begin
+car.Move("R")
+print "car moved Right"
+End
+
+Procedure Move_Straight
+Begin
+car.Move("S")
+print "car moved straight"
+End
+```
+---
+## Magic number vs symbolic constant 
+
+### a)  Magic number
+```
+Procedure Potential_Energy(mass, height)
+Begin
+potentialEnergy = mass * height * 9.81
+print potentialEnergy
+End
+```
+
+### b) Symbolic constant
+
+```
+GRAVITATIONAL_CONSTANT = 9.81
+
+Procedure Potential_Energy(mass, height)
+Begin
+potentialEnergy = mass * height * GRAVITATIONAL_CONSTANT
+print potentialEnergy
+End
+```
+
+(based on [SourceMaking refactoring guidelines](https://sourcemaking.com/refactoring))
+    
+---
+##  Long conditional statements vs explicit function 
+
+### a) Long conditional statements
+
+```python
+def charge_customer(time):
+    if time.before(DAYTIME_START) or time.after(DAYTIME_END):
+        charge = quantity * evening_rate + evening_service_charge
+    else:
+        charge = quantity * morning_rate
+    return charge
+```
+
+### b) Explicit function
+
+```python
+def charge_customer(time):
+    if not_day_time(time):
+        charge = day_charge(quantity)
+    else:
+        charge = evening_charge(quantity)
+    return charge
+    
+def not_day_time(time):
+    #do something
+    
+def day_charge(quantity):
+    # do something
+    
+def evening_charge(quantity):
+    # do something
+```
+ (based on [SourceMaking refactoring guidelines](https://sourcemaking.com/refactoring))
+
+---
+## Long parameter list vs pass whole object 
+
+### a) Long parameter list
+```python
+def estimate_fuel_cost (journey, car ):
+    journey_Time = journey.get_time()
+    average_Speed = journey.get_average_speed( )
+    distance = calculate_distance_travelled( journey_time, average_speed )
+    return car.cost_per_kilometre( ) * distance
+
+def calculate_distance_travelled( journey_time, average_speed ):
+  return journey_time * average_speed;
+```
+
+### b) Pass whole object
+
+```python
+def estimate_fuel_cost (journey, car ):
+    distance = calculate_distance_travelled(journey)
+    return car.cost_per_kilometre( ) * distance
+
+
+def calculate_distance_travelled( journey ):
+  return journey.journey_time * journey.average_speed
+```
+ (based on [SourceMaking refactoring guidelines](https://sourcemaking.com/refactoring))
+
+---
 
 ## Explicit interface vs. invisible dependencies (C++)
 
@@ -592,7 +755,6 @@ int rnd(double d, bool rnd_up)
     return (rnd_up) ? ceil(d) : d;
 }
 ```
-
 ---
 
 ## Constructor vs. explicit vs. intrinsic in Fortran
@@ -954,6 +1116,7 @@ print(my_cat.hunger)
 ## Conclusions
 
 - Modular and well structured code is easy to test
+- **Employ refactoring**
 - Entangled code is difficult to test
 - Introduce testing early - it will **automatically guide you towards a modular and well structured code**
 - Compose your code out of **pure functions**
