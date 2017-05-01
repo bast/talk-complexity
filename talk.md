@@ -39,6 +39,11 @@ _"The complexity of software is an essential property, not an accidental one [Fr
 - There is no silver bullet for managing complexity. However, there are some bad practices that we can avoid.
 
 ---
+## Example: Let's look at growth of [Pylint](https://pylint.org/) project 
+
+<img src="img/pylint_growth.png" style="height: 500px;width:800px"/>
+(line count and file count generated using [GitStats](http://gitstats.sourceforge.net/), contributions taken from [OpenHub](https://www.openhub.net/p/pylint))
+---
 
 ## The front panel: many dependencies
 
@@ -109,9 +114,9 @@ _"The complexity of software is an essential property, not an accidental one [Fr
 
 ---
 
-## Example: strong coupling
+## Example: strong coupling 
 ```
-# Function to check if users with date of birth already (#00-00-0000) exists
+# Pseudocode to check if users with date of birth already (#00-00-0000) exists
 
 Procedure DATE Check
 Begin
@@ -145,7 +150,7 @@ End
 ## Example: improving bad design
 
 ```
-# Separating the validation and database access
+# Pseudocode for separating the validation and database access
 
 Procedure DATE Check
 Begin
@@ -622,31 +627,31 @@ a <- factor_and_offset2(2.0, 3.0)
 ---
 ## Removing duplication
 
-### How can we avoid duplication in the following code sample?
+### How can we avoid duplication in the following pseudocode?
 
 ```
 Procedure Move_Left
 Begin
-car.Move("L")
+change_car_direction("Left")
 print "car moved left"
 End
 
 Procedure Move_Right
 Begin
-car.Move("R")
+change_car_direction("Right")
 print "car moved Right"
 End
 
 Procedure Move_Straight
 Begin
-car.Move("S")
+change_car_direction("Straight")
 print "car moved straight"
 End
 ```
 ---
-## Magic number vs symbolic constant 
+## Magic number vs symbolic constant (Pseudocode)
 
-### a)  Magic number
+### a)  Magic number 
 ```
 Procedure Potential_Energy(mass, height)
 Begin
@@ -655,7 +660,7 @@ print potentialEnergy
 End
 ```
 
-### b) Symbolic constant
+### b) Symbolic constant 
 
 ```
 GRAVITATIONAL_CONSTANT = 9.81
