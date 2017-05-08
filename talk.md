@@ -199,7 +199,7 @@ End
 - Given the same input, a pure function *always* returns the same value
 - Function calls can be optimized away
 - Pure function == data
-- Purity is key to equational reasoning
+
 
 <img src="img/bugbarrier.jpg" style="width: 40%;"/>
 
@@ -259,37 +259,8 @@ get_bmi()
 
 ### But we need to deal with state somewhere
 
-- Examples later in this talk
+- [Examples later in this talk](#51)
 ]
-
----
-
-## Equational reasoning
-
-- We start with a function:
-  $$ f(x) $$
-- We wish to evaluate this:
-  $$ y = f(a) + f(b) \times [f(c) - f(c)] $$
-- We can simplify:
-  $$ y = f(a) + f(b) \times 0 $$
-  $$ y = f(a) $$
-- Another example:
-  $$ z = f(a) + f(b) + f(c) + f(d) $$
-- We know we can rearrange (important for concurrency):
-  $$ z = f(b) + f(d) + f(c) + f(a) $$
-
----
-
-## Concurrency
-
-- Concurrency in imperative code is very hard
-- You are totally lost in the dark without a good thread checker
-- In a pure, immutable world concurrency is nearly trivial!
-- Prefer immutable data to mutable data
-
-<img src="img/floor-loom-diagram.jpg" style="width: 55%;"/>
-
-(Slide taken from [Complexity in software development by Jonas Juselius](https://github.com/scisoft/complexity))
 
 ---
 
@@ -305,7 +276,6 @@ get_bmi()
 (Slide taken from [Complexity in software development by Jonas Juselius](https://github.com/scisoft/complexity))
 
 ---
-
 ## One way to look at your code
 
 ![](img/main-inside.svg)
@@ -322,21 +292,20 @@ get_bmi()
 
 ---
 
-## Recommendations
+## Recommendations 
 
-- Keep I/O on the outside and connected (examples later)
+- Keep I/O on the outside and connected ([examples later](#45))
 - Always read/write on the outside and pass data
 - Do not read/write deep down inside the code
 - Keep the inside of your code pure/stateless
 - Move all the state to the outside of your code
 - Keep the stateful outside shell thin
-- Unit test the inside
-- Regression test the shell
+
+
 
 ![](img/good-vs-bad.svg)
 
 ---
-
 
 template: inverse
 
@@ -429,28 +398,11 @@ getlnm()     vs     getlastname()
 
 ---
 
-## Modules testable on its own
-
-- Sharpens interfaces
-- Once you start testing your library you really see the coupling and cohesion
-- Increases development speed
-
-## Libraries built on its own
-
-- Prerequisite for testable on its own
-
-## Libraries have own development history
-
-- Decouple the development history
-- Each unit should have its own Git history/repository
-
----
-
 ## Structuring large applications
 
 ### python - packages
 ```pythons
-Graphics/                       Top-level package
+graphics/                       Top-level package
       __init__.py               Initialize the sound package
       formats/                  Subpackage for file format conversions
               __init__.py
@@ -458,7 +410,7 @@ Graphics/                       Top-level package
               png.py
               gif.py
               ...
-      actions/                  Subpackage for sound effects
+      actions/                  Subpackage for actions
               __init__.py
               zoom.py
               crop.py
@@ -482,7 +434,7 @@ travelkit/
 |   |-- __init__.py
 |   |-- main.py
 |   |-- test
-|       |-- baic_test.py
+|       |-- basic_test.py
 |       |-- advanced_tests.py
 |-- setup.py
 ```
@@ -762,30 +714,6 @@ int rnd(double d, bool rnd_up)
 ```
 ---
 
-## Constructor vs. explicit vs. intrinsic in Fortran
-
-### a) array constructor
-
-```fortran
-result = (/(vector(i)*factor + offset, i = 1, size(vector))/)
-```
-
-### b) explicit
-
-```fortran
-do i = 1, size(vector)
-    result(i) = vector(i)*factor + offset
-end do
-```
-
-### c) intrinsic array operation
-
-```fortran
-result = vector*factor + offset
-```
-
----
-
 ## Implicit vs. implicit none in Fortran
 
 ### a) implicit
@@ -810,38 +738,6 @@ mass = 2.0d0
 acceleration = 3.0d0
 
 force = mass*acceleration
-```
-
----
-
-## Variable reuse
-
-### a) reuse memory
-
-```fortran
-integer, parameter :: length = 1000000
-real(8) :: distances(length)
-
-call get_distances(distances)
-call do_something(distances)
-
-! now we do not need distances anymore, we can safely reuse the array
-call get_angles(distances)
-call do_something_else(distances)
-```
-
-### b) allocate twice the memory
-
-```fortran
-integer, parameter :: length = 1000000
-real(8) :: distances(length)
-real(8) :: angles(length)
-
-call get_distances(distances)
-call do_something(distances)
-
-call get_angles(angles)
-call do_something_else(angles)
 ```
 
 ---
@@ -993,36 +889,6 @@ def myfunction(a, b, c):
     from somelib import somefunction
     # use somefunction
     return something
-```
-
----
-
-## Intent vs. unspecified
-
-### a) intent specified
-
-```fortran
-subroutine do_something(a, b, c, d)
-    real(8), intent(in)    :: a
-    logical, intent(in)    :: b
-    real(8), intent(inout) :: c
-    real(8), intent(out)   :: d
-
-    ! ...
-end subroutine
-```
-
-### b) intent unspecified
-
-```fortran
-subroutine do_something(a, b, c, d)
-    real(8) :: a
-    logical :: b
-    real(8) :: c
-    real(8) :: d
-
-    ! ...
-end subroutine
 ```
 
 ---
