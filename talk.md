@@ -453,8 +453,8 @@ travelkit/
 - Consider very carefully whether you want to depend on the Boost library.
 - Do not use C constructs in C++ code.
 - Know the STL, 'cause the STL is your friend and will always be.
-- Use algorithms from the \<algorithm\> header whenever possible.
-- Use functional constructs from the \<functional\> header whenever possible.
+- Use algorithms from the `<algorithm>` header whenever possible.
+- Use functional constructs from the `<functional>` header whenever possible.
 - Use tuples for multiple return values whenever it makes sense (avoid doing
   pointer and/or reference tricks to get more stuff out of a function because it
   will mess up your head).
